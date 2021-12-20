@@ -1,12 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void save_sequence(char* sequence){
+void save_sequence(const char* path_output, char* sequence){
 /* Cette procedure sauvegarde la sequence donnee afin de faciliter la lecture */
 
-FILE* fp= fopen("sequenceF.txt", "w");
+FILE* fp= fopen(path_output, "w");
     if(!fp){
-            printf("l'ouverture a echoue. \n");
+            printf("L'ouverture a echoue. \n");
             exit(EXIT_FAILURE);
     }
     int i=0;
@@ -28,5 +28,8 @@ fclose(fp);
 
 int main(int argc, char *argv[]){
         char prot1[] = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBBBBBB";
-        save_sequence(prot1);
+        char path_output[256];
+        printf("Dans quel fichier (déjà existant) voulez-vous sauvegarder votre séquence? \n"); /*Attention, sous windows, mettre deux \\*/
+        scanf("%s", path_output);
+        save_sequence(path_output, prot1);
 }
