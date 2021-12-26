@@ -1,198 +1,344 @@
 #include "utils.h"
+#include "module_traduction.h"
 
 void traduction(const char* path_output, char* sequence){
-
-//Mise en place des compteurs et inititation de la séquence traduite
-    int i=0;
+    int i =0;
     int j=0;
-    traduit[10000];
+    char trad[10000];
 
-//Traduction
     while(sequence[i]!='\0'){
-        if (sequence[i]!= 'A'||'U'||'G'||'C'){
-            printf("Attention, il ne s'agit pas d'une sequence ARN, traduction impossible! :( \n");
-        }
 
-        //Triplet de nucléotides commencant par A
+//triplets commençant par A
         if(sequence[i]=='A'){
-            i++;
-            if(sequence[i]=='G'){
-                i++;
-                if(sequence[i]=='A'||'G'){
-                    traduit[j]='R';
+            if(sequence[i+1]=='A'){
+                if(sequence[i+2]=='U'){
+                    trad[j]='N';
                     j++;
-                    i++;
                 }
-                else{
-                    traduit[j]='S';
+                else if(sequence[i+2]=='C'){
+                    trad[j]='N';
                     j++;
-                    i++;
                 }
+                else if(sequence[i+2]=='A'){
+                    trad[j]='K';
+                    j++;
+                }
+                else {
+                    trad[j]='K';
+                    j++;
+                }               
             }
 
-            else if(sequence[i]=='U'){
-                i++;
-                if(sequence[i]=='A'||'C'||'U'){
-                    traduit[j]='I';
+            else if(sequence[i+1]=='C'){
+                if(sequence[i+2]=='U'){
+                    trad[j]='T';
                     j++;
-                    i++;
                 }
-                else{
-                    traduit[j]='M';
+                else if(sequence[i+2]=='C'){
+                    trad[j]='T';
                     j++;
-                    i++;
-                }            
+                }
+                else if(sequence[i+2]=='A'){
+                    trad[j]='T';
+                    j++;
+                }
+                else {
+                    trad[j]='T';
+                    j++;
+                }               
             }
 
-            else if(sequence[i]=='A'){
-                i++;
-                if(sequence[i]=='A'||'G'){
-                    traduit[j]='K';
+            else if(sequence[i+1]=='G'){
+                if(sequence[i+2]=='U'){
+                    trad[j]='S';
                     j++;
-                    i++;
                 }
-                else{
-                    traduit[j]='N';
+                else if(sequence[i+2]=='C'){
+                    trad[j]='S';
                     j++;
-                    i++;
-                }            
+                }
+                else if(sequence[i+2]=='A'){
+                    trad[j]='R';
+                    j++;
+                }
+                else {
+                    trad[j]='R';
+                    j++;
+                }               
             }
 
-            else{
-                traduit[j]='T';
-                j++;
-                i+2;
-            }            
+            else {
+                if(sequence[i+2]=='U'){
+                    trad[j]='I';
+                    j++;
+                }
+                else if(sequence[i+2]=='C'){
+                    trad[j]='I';
+                    j++;
+                }
+                else if(sequence[i+2]=='A'){
+                    trad[j]='I';
+                    j++;
+                }
+                else {
+                    trad[j]='M';
+                    j++;
+                }               
+            }                        
         }
 
-        //Triplet de nucléotides commencant par C
+//triplets commençant par C
         else if(sequence[i]=='C'){
-            i++;
-            if(sequence[i]=='G'){
-                traduit[j]='R';
-                j++;
-                i+2;
-            }
-
-            else if(sequence[i]=='U'){
-                traduit[j]='L';
-                j++;
-                i+2;
-            }
-
-            else if(sequence[i]=='A'){
-                i++;
-                if(sequence[i]=='U'||'C'){
-                    traduit[j]='H';
+            if(sequence[i+1]=='A'){
+                if(sequence[i+2]=='U'){
+                    trad[j]='H';
                     j++;
-                    i++;
                 }
-                else{
-                    traduit[j]='Q';
+                else if(sequence[i+2]=='C'){
+                    trad[j]='H';
                     j++;
-                    i++;
-                }            
+                }
+                else if(sequence[i+2]=='A'){
+                    trad[j]='Q';
+                    j++;
+                }
+                else {
+                    trad[j]='Q';
+                    j++;
+                }               
             }
 
-            else{
-                traduit[j]='P';
-                j++;
-                i+2;
-            }            
-        }    
+            else if(sequence[i+1]=='C'){
+                if(sequence[i+2]=='U'){
+                    trad[j]='P';
+                    j++;
+                }
+                else if(sequence[i+2]=='C'){
+                    trad[j]='P';
+                    j++;
+                }
+                else if(sequence[i+2]=='A'){
+                    trad[j]='P';
+                    j++;
+                }
+                else {
+                    trad[j]='P';
+                    j++;
+                }               
+            }
 
-        //Triplet de nucléotides commencant par G
+            else if(sequence[i+1]=='G'){
+                if(sequence[i+2]=='U'){
+                    trad[j]='R';
+                    j++;
+                }
+                else if(sequence[i+2]=='C'){
+                    trad[j]='R';
+                    j++;
+                }
+                else if(sequence[i+2]=='A'){
+                    trad[j]='R';
+                    j++;
+                }
+                else {
+                    trad[j]='R';
+                    j++;
+                }               
+            }
+
+            else {
+                if(sequence[i+2]=='U'){
+                    trad[j]='L';
+                    j++;
+                }
+                else if(sequence[i+2]=='C'){
+                    trad[j]='L';
+                    j++;
+                }
+                else if(sequence[i+2]=='A'){
+                    trad[j]='L';
+                    j++;
+                }
+                else {
+                    trad[j]='L';
+                    j++;
+                }               
+            }                        
+        }
+
+//triplets commençant par G
         else if(sequence[i]=='G'){
-            i++;
-            if(sequence[i]=='G'){
-                traduit[j]='G';
-                j++;
-                i+2;
-            }
-
-            else if(sequence[i]=='U'){
-                traduit[j]='V';
-                j++;
-                i+2;
-            }
-
-            else if(sequence[i]=='A'){
-                i++;
-                if(sequence[i]=='U'||'C'){
-                    traduit[j]='D';
+            if(sequence[i+1]=='A'){
+                if(sequence[i+2]=='U'){
+                    trad[j]='D';
                     j++;
-                    i++;
                 }
-                else{
-                    traduit[j]='E';
+                else if(sequence[i+2]=='C'){
+                    trad[j]='D';
                     j++;
-                    i++;
-                }            
+                }
+                else if(sequence[i+2]=='A'){
+                    trad[j]='E';
+                    j++;
+                }
+                else {
+                    trad[j]='E';
+                    j++;
+                }               
             }
 
-            else{
-                traduit[j]='A';
-                j++;
-                i+2;
-            }            
+            else if(sequence[i+1]=='C'){
+                if(sequence[i+2]=='U'){
+                    trad[j]='A';
+                    j++;
+                }
+                else if(sequence[i+2]=='C'){
+                    trad[j]='A';
+                    j++;
+                }
+                else if(sequence[i+2]=='A'){
+                    trad[j]='A';
+                    j++;
+                }
+                else {
+                    trad[j]='A';
+                    j++;
+                }               
+            }
+
+            else if(sequence[i+1]=='G'){
+                if(sequence[i+2]=='U'){
+                    trad[j]='G';
+                    j++;
+                }
+                else if(sequence[i+2]=='C'){
+                    trad[j]='G';
+                    j++;
+                }
+                else if(sequence[i+2]=='A'){
+                    trad[j]='G';
+                    j++;
+                }
+                else {
+                    trad[j]='G';
+                    j++;
+                }               
+            }
+
+            else {
+                if(sequence[i+2]=='U'){
+                    trad[j]='V';
+                    j++;
+                }
+                else if(sequence[i+2]=='C'){
+                    trad[j]='V';
+                    j++;
+                }
+                else if(sequence[i+2]=='A'){
+                    trad[j]='V';
+                    j++;
+                }
+                else {
+                    trad[j]='V';
+                    j++;
+                }               
+            }                        
         }
 
-        //Triplet de nucléotides commencant par U
-        else{
-            i++;
-            if(sequence[i]=='G'){
-                i++;
-                if(sequence[i]=='U'||'C'){
-                    traduit[j]='C';
+//triplets commençant par U
+        else {
+            if(sequence[i+1]=='A'){
+                if(sequence[i+2]=='U'){
+                    trad[j]='Y';
                     j++;
-                    i++;
                 }
-                else if (sequence[i]=='G'){
-                    traduit[j]='W';
+                else if(sequence[i+2]=='C'){
+                    trad[j]='Y';
                     j++;
-                    i++;
                 }
-                else{
-                    traduit[j]='*';
+                else if(sequence[i+2]=='A'){
+                    trad[j]='*';
                     j++;
-                    i++;
-                }            
+                }
+                else {
+                    trad[j]='*';
+                    j++;
+                }               
             }
 
-            else if(sequence[i]=='U'){
-                i++;
-                if(sequence[i]=='G'||'A'){
-                    traduit[j]='L';
+            else if(sequence[i+1]=='C'){
+                if(sequence[i+2]=='U'){
+                    trad[j]='S';
                     j++;
-                    i++;
                 }
-                else{
-                    traduit[j]='F';
+                else if(sequence[i+2]=='C'){
+                    trad[j]='S';
                     j++;
-                    i++;
-                }            
-            }           
-
-            else if(sequence[i]=='A'){
-                i++;
-                if(sequence[i]=='U'||'C'){
-                    traduit[j]='Y';
-                    j++;
-                    i++;
                 }
-                else{
-                    traduit[j]='*';
+                else if(sequence[i+2]=='A'){
+                    trad[j]='S';
                     j++;
-                    i++;
-                }            
+                }
+                else {
+                    trad[j]='S';
+                    j++;
+                }               
             }
 
-            else{
-                traduit[j]='S';
-                j++;
-                i+2;
-            }            
+            else if(sequence[i+1]=='G'){
+                if(sequence[i+2]=='U'){
+                    trad[j]='C';
+                    j++;
+                }
+                else if(sequence[i+2]=='C'){
+                    trad[j]='C';
+                    j++;
+                }
+                else if(sequence[i+2]=='A'){
+                    trad[j]='*';
+                    j++;
+                }
+                else {
+                    trad[j]='W';
+                    j++;
+                }               
+            }
+
+            else {
+                if(sequence[i+2]=='U'){
+                    trad[j]='F';
+                    j++;
+                }
+                else if(sequence[i+2]=='C'){
+                    trad[j]='F';
+                    j++;
+                }
+                else if(sequence[i+2]=='A'){
+                    trad[j]='L';
+                    j++;
+                }
+                else {
+                    trad[j]='L';
+                    j++;
+                }               
+            }                        
         }
 
+        i=i+3;
+    printf("%d : %c --> %c \n",i,sequence[i], trad[j]);
     }
+//sauvegarde de la séquence
+    printf("%s",trad);
+    printf("Votre sequence a bien été traduite, elle est désormais enregistrée ici : %s \n", path_output );
+    save_sequence(path_output, trad);
+
 }
+
+void module_traduction(char* sequence){
+    char path_output[256];
+    printf("Dans quel fichier souhaitez-vous enregistrer votre sequence traduite? \n");
+    scanf("%s", path_output);
+    
+    traduction(path_output, sequence);
+}
+
