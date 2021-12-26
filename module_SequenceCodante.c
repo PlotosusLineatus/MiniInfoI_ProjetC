@@ -1,6 +1,7 @@
 #include "utils.h"
+#include "module_SequenceCodante.h"
 
-void ChercheSeq(){
+void ChercheSeq(const char* path_output, char* sequence){
 //Cette fonction cherche le plus grand fragment de séquence commencant par un codon start et finissant par un codon stop
 
 //Variables
@@ -16,7 +17,7 @@ void ChercheSeq(){
 
     //Boucle
     while(sequence[i]!='\0'){
-
+        
     //Recherche de séquence codante    
         while(stop==0){
         //Recherche du codon start    
@@ -72,8 +73,8 @@ void ChercheSeq(){
 
     //inversion de la chaine
     int k,n; //compteurs
-    char nucleo //stocke le nucleotide afin de ne parcourir que la moitié de la chaine
-    n=strlen(sequence)
+    char nucleo; //stocke le nucleotide afin de ne parcourir que la moitié de la chaine
+    n=strlen(sequence);
 
     for(k=0;k<n/2;k++){
         nucleo=sequence[k];
@@ -81,7 +82,7 @@ void ChercheSeq(){
         sequence[n-k-1]=nucleo;
     }
     //Rendre la chaine complementaire
-    while (i!=\0){
+    while (i!='\0'){
         if (sequence[i]=='A'){
             sequence[i]='T';
             i++;
@@ -156,4 +157,15 @@ while(sequence[i]!='\0'){
         i=stop+1;
         stop=0;
     }
+
+    printf("Votre plus grande Orf a bien été sauvegardée, elle est désormais enregistrée ici : %s \n", path_output );
+    save_sequence(path_output, Orf);
+}
+
+void module_SequenceCodante(char* sequence){
+    char path_output[256];
+    printf("Dans quel fichier souhaitez-vous enregistrer votre plus grand ORF? \n");
+    scanf("%s", path_output);
+    
+    ChercheSeq(path_output, sequence);
 }
