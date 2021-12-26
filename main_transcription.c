@@ -4,8 +4,7 @@
 //Main test pour le module_transcription
 
 int main(int argc, char *argv[]){
-        
-        char path_output[256];
+    
         char path_input[256];
         char sequence[10000];
 

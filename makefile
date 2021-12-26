@@ -19,4 +19,4 @@ clean:
 	rm -f *.o
 
 mrproper: clean
-	rm -f jeu
+	rm -f main_transcription
