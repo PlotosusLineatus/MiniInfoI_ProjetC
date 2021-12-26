@@ -1,5 +1,5 @@
 #include "utils.h"
-
+#include "module_transcription.h"
 
 void transcription(const char* path_output, char* sequence){
 
@@ -21,33 +21,32 @@ void transcription(const char* path_output, char* sequence){
         }
     
     //transcription
-    char transcrit[5000];
+    char transcrit[10000];
     int i=0;
 
     while (sequence[i] != '\0'){
-        if(sequence[i] == 'A' || 'C' || 'G'){
-        transcrit[i]=sequence[i];
+        if(sequence[i] == 'T'){
+        transcrit[i]='U';
         i++;
         }
         else{
-            transcrit[i]='U';
+            transcrit[i]= sequence[i];
             i++;
         }
     } 
 
     //sauvegarde de la séquence
+
     printf("Votre sequence a bien été traduite, elle est désormais enregistrée ici : %s \n", path_output );
     save_sequence(path_output, transcrit);
     }
 
 //deroule du module transciption
-void module_transcription(){
+void module_transcription(char* sequence){
     char path_output[256];
-    printf("Dans quel fichier (déjà existant) souhaitez-vous enregistrer votre sequence transcite? \n");
+    printf("Dans quel fichier souhaitez-vous enregistrer votre sequence transcite? \n");
     scanf("%s", path_output);
     
-    char sequence[]="ATGAATTAAATGGTAATGGCC"; 
-    /* pour tester, a retirer plus tard */
     transcription(path_output, sequence);
 }
     
