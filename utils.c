@@ -10,9 +10,10 @@ void extract_sequence(const char* path_input, char* sequence) {
 	char c;
 	int indice=0;
 	while((c=fgetc(fasta))!=EOF) {
-		if (c!='\n')
+		if (c!='\n'){
 			sequence[indice]=c;
-		indice++;
+			indice++;
+		}
 	}
 }
 
