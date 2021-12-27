@@ -1,336 +1,383 @@
 #include "utils.h"
 #include "module_traduction.h"
 
-void traduction(const char* path_output, char* sequence){
-    int i =0;
-    int j=0;
-    char trad[10000];
-
-    while(sequence[i]!='\0'){
-
-//triplets commençant par A
-        if(sequence[i]=='A'){
-            if(sequence[i+1]=='A'){
-                if(sequence[i+2]=='U'){
-                    trad[j]='N';
-                    j++;
-                }
-                else if(sequence[i+2]=='C'){
-                    trad[j]='N';
-                    j++;
-                }
-                else if(sequence[i+2]=='A'){
-                    trad[j]='K';
-                    j++;
-                }
-                else {
-                    trad[j]='K';
-                    j++;
-                }               
-            }
-
-            else if(sequence[i+1]=='C'){
-                if(sequence[i+2]=='U'){
-                    trad[j]='T';
-                    j++;
-                }
-                else if(sequence[i+2]=='C'){
-                    trad[j]='T';
-                    j++;
-                }
-                else if(sequence[i+2]=='A'){
-                    trad[j]='T';
-                    j++;
-                }
-                else {
-                    trad[j]='T';
-                    j++;
-                }               
-            }
-
-            else if(sequence[i+1]=='G'){
-                if(sequence[i+2]=='U'){
-                    trad[j]='S';
-                    j++;
-                }
-                else if(sequence[i+2]=='C'){
-                    trad[j]='S';
-                    j++;
-                }
-                else if(sequence[i+2]=='A'){
-                    trad[j]='R';
-                    j++;
-                }
-                else {
-                    trad[j]='R';
-                    j++;
-                }               
-            }
-
-            else {
-                if(sequence[i+2]=='U'){
-                    trad[j]='I';
-                    j++;
-                }
-                else if(sequence[i+2]=='C'){
-                    trad[j]='I';
-                    j++;
-                }
-                else if(sequence[i+2]=='A'){
-                    trad[j]='I';
-                    j++;
-                }
-                else {
-                    trad[j]='M';
-                    j++;
-                }               
-            }                        
-        }
-
-//triplets commençant par C
-        else if(sequence[i]=='C'){
-            if(sequence[i+1]=='A'){
-                if(sequence[i+2]=='U'){
-                    trad[j]='H';
-                    j++;
-                }
-                else if(sequence[i+2]=='C'){
-                    trad[j]='H';
-                    j++;
-                }
-                else if(sequence[i+2]=='A'){
-                    trad[j]='Q';
-                    j++;
-                }
-                else {
-                    trad[j]='Q';
-                    j++;
-                }               
-            }
-
-            else if(sequence[i+1]=='C'){
-                if(sequence[i+2]=='U'){
-                    trad[j]='P';
-                    j++;
-                }
-                else if(sequence[i+2]=='C'){
-                    trad[j]='P';
-                    j++;
-                }
-                else if(sequence[i+2]=='A'){
-                    trad[j]='P';
-                    j++;
-                }
-                else {
-                    trad[j]='P';
-                    j++;
-                }               
-            }
-
-            else if(sequence[i+1]=='G'){
-                if(sequence[i+2]=='U'){
-                    trad[j]='R';
-                    j++;
-                }
-                else if(sequence[i+2]=='C'){
-                    trad[j]='R';
-                    j++;
-                }
-                else if(sequence[i+2]=='A'){
-                    trad[j]='R';
-                    j++;
-                }
-                else {
-                    trad[j]='R';
-                    j++;
-                }               
-            }
-
-            else {
-                if(sequence[i+2]=='U'){
-                    trad[j]='L';
-                    j++;
-                }
-                else if(sequence[i+2]=='C'){
-                    trad[j]='L';
-                    j++;
-                }
-                else if(sequence[i+2]=='A'){
-                    trad[j]='L';
-                    j++;
-                }
-                else {
-                    trad[j]='L';
-                    j++;
-                }               
-            }                        
-        }
-
-//triplets commençant par G
-        else if(sequence[i]=='G'){
-            if(sequence[i+1]=='A'){
-                if(sequence[i+2]=='U'){
-                    trad[j]='D';
-                    j++;
-                }
-                else if(sequence[i+2]=='C'){
-                    trad[j]='D';
-                    j++;
-                }
-                else if(sequence[i+2]=='A'){
-                    trad[j]='E';
-                    j++;
-                }
-                else {
-                    trad[j]='E';
-                    j++;
-                }               
-            }
-
-            else if(sequence[i+1]=='C'){
-                if(sequence[i+2]=='U'){
-                    trad[j]='A';
-                    j++;
-                }
-                else if(sequence[i+2]=='C'){
-                    trad[j]='A';
-                    j++;
-                }
-                else if(sequence[i+2]=='A'){
-                    trad[j]='A';
-                    j++;
-                }
-                else {
-                    trad[j]='A';
-                    j++;
-                }               
-            }
-
-            else if(sequence[i+1]=='G'){
-                if(sequence[i+2]=='U'){
-                    trad[j]='G';
-                    j++;
-                }
-                else if(sequence[i+2]=='C'){
-                    trad[j]='G';
-                    j++;
-                }
-                else if(sequence[i+2]=='A'){
-                    trad[j]='G';
-                    j++;
-                }
-                else {
-                    trad[j]='G';
-                    j++;
-                }               
-            }
-
-            else {
-                if(sequence[i+2]=='U'){
-                    trad[j]='V';
-                    j++;
-                }
-                else if(sequence[i+2]=='C'){
-                    trad[j]='V';
-                    j++;
-                }
-                else if(sequence[i+2]=='A'){
-                    trad[j]='V';
-                    j++;
-                }
-                else {
-                    trad[j]='V';
-                    j++;
-                }               
-            }                        
-        }
-
-//triplets commençant par U
-        else {
-            if(sequence[i+1]=='A'){
-                if(sequence[i+2]=='U'){
-                    trad[j]='Y';
-                    j++;
-                }
-                else if(sequence[i+2]=='C'){
-                    trad[j]='Y';
-                    j++;
-                }
-                else if(sequence[i+2]=='A'){
-                    trad[j]='*';
-                    j++;
-                }
-                else {
-                    trad[j]='*';
-                    j++;
-                }               
-            }
-
-            else if(sequence[i+1]=='C'){
-                if(sequence[i+2]=='U'){
-                    trad[j]='S';
-                    j++;
-                }
-                else if(sequence[i+2]=='C'){
-                    trad[j]='S';
-                    j++;
-                }
-                else if(sequence[i+2]=='A'){
-                    trad[j]='S';
-                    j++;
-                }
-                else {
-                    trad[j]='S';
-                    j++;
-                }               
-            }
-
-            else if(sequence[i+1]=='G'){
-                if(sequence[i+2]=='U'){
-                    trad[j]='C';
-                    j++;
-                }
-                else if(sequence[i+2]=='C'){
-                    trad[j]='C';
-                    j++;
-                }
-                else if(sequence[i+2]=='A'){
-                    trad[j]='*';
-                    j++;
-                }
-                else {
-                    trad[j]='W';
-                    j++;
-                }               
-            }
-
-            else {
-                if(sequence[i+2]=='U'){
-                    trad[j]='F';
-                    j++;
-                }
-                else if(sequence[i+2]=='C'){
-                    trad[j]='F';
-                    j++;
-                }
-                else if(sequence[i+2]=='A'){
-                    trad[j]='L';
-                    j++;
-                }
-                else {
-                    trad[j]='L';
-                    j++;
-                }               
-            }                        
-        }
-
-        i=i+3;
-    printf("%d : %c --> %c \n",i,sequence[i], trad[j]);
+//Fonction pour determiner quel AA ce trouve à cette position
+int n_A(char* seq, int i){
+    if(seq[i]=='A'){
+        return 1;
     }
+}
+int n_C(char* seq, int i){
+    if(seq[i]=='C'){
+        return 1;
+    }
+}
+int n_G(char* seq, int i){
+    if(seq[i]=='G'){
+        return 1;
+    }
+}
+int n_U(char* seq, int i){
+    if(seq[i]=='U'){
+        return 1;
+    }
+}
+
+//Programme de traduction
+void traduction (const char* path_output, char* sequence){
+    int i=0;
+    int j=0;
+    char traduit[10000];
+    int t;
+
+    t=strlen(sequence);
+
+    for(i=0; i<t; i=i+3){
+        //triplets commencant par AA
+        if (n_A(sequence,i)==1 && n_A(sequence,i+1)==1 && n_U(sequence,i+2)==1){
+            traduit[j]='N';
+            j++;
+            
+        }
+        else if (n_A(sequence,i)==1 && n_A(sequence,i+1)==1 && n_C(sequence,i+2)==1){
+            traduit[j]='N';
+            j++;
+            
+        }
+        else if (n_A(sequence,i)==1 && n_A(sequence,i+1)==1 && n_A(sequence,i+2)==1){
+            traduit[j]='K';
+            j++;
+            
+        }
+        else if (n_A(sequence,i)==1 && n_A(sequence,i+1)==1 && n_G(sequence,i+2)==1){
+            traduit[j]='K';
+            j++;
+            
+        }
+        //triplets commencant par AC
+        else if (n_A(sequence,i)==1 && n_C(sequence,i+1)==1 && n_U(sequence,i+2)==1){
+            traduit[j]='T';
+            j++;
+            
+        }
+        else if (n_A(sequence,i)==1 && n_C(sequence,i+1)==1 && n_C(sequence,i+2)==1){
+            traduit[j]='T';
+            j++;
+            
+        }
+        else if (n_A(sequence,i)==1 && n_C(sequence,i+1)==1 && n_A(sequence,i+2)==1){
+            traduit[j]='T';
+            j++;
+            
+        }
+        else if (n_A(sequence,i)==1 && n_C(sequence,i+1)==1 && n_G(sequence,i+2)==1){
+            traduit[j]='T';
+            j++;
+            
+        }
+        //triplets commencant par AG
+        else if (n_A(sequence,i)==1 && n_G(sequence,i+1)==1 && n_U(sequence,i+2)==1){
+            traduit[j]='S';
+            j++;
+            
+        }
+        else if (n_A(sequence,i)==1 && n_G(sequence,i+1)==1 && n_C(sequence,i+2)==1){
+            traduit[j]='S';
+            j++;
+            
+        }
+        else if (n_A(sequence,i)==1 && n_G(sequence,i+1)==1 && n_A(sequence,i+2)==1){
+            traduit[j]='S';
+            j++;
+            
+        }
+        else if (n_A(sequence,i)==1 && n_G(sequence,i+1)==1 && n_G(sequence,i+2)==1){
+            traduit[j]='S';
+            j++;
+            
+        }
+        //triplets commencant par AU
+        else if (n_A(sequence,i)==1 && n_U(sequence,i+1)==1 && n_U(sequence,i+2)==1){
+            traduit[j]='I';
+            j++;
+            
+        }
+        else if (n_A(sequence,i)==1 && n_U(sequence,i+1)==1 && n_C(sequence,i+2)==1){
+            traduit[j]='I';
+            j++;
+            
+        }
+        else if (n_A(sequence,i)==1 && n_U(sequence,i+1)==1 && n_A(sequence,i+2)==1){
+            traduit[j]='I';
+            j++;
+            
+        }
+        else if (n_A(sequence,i)==1 && n_U(sequence,i+1)==1 && n_G(sequence,i+2)==1){
+            traduit[j]='M';
+            j++;
+            
+        }
+
+        //triplets commencant par CA
+        else if (n_C(sequence,i)==1 && n_A(sequence,i+1)==1 && n_U(sequence,i+2)==1){
+            traduit[j]='H';
+            j++;
+            
+        }
+        else if (n_C(sequence,i)==1 && n_A(sequence,i+1)==1 && n_C(sequence,i+2)==1){
+            traduit[j]='H';
+            j++;
+            
+        }
+        else if (n_C(sequence,i)==1 && n_A(sequence,i+1)==1 && n_A(sequence,i+2)==1){
+            traduit[j]='Q';
+            j++;
+            
+        }
+        else if (n_C(sequence,i)==1 && n_A(sequence,i+1)==1 && n_G(sequence,i+2)==1){
+            traduit[j]='Q';
+            j++;
+            
+        }
+        //triplets commencant par CC
+        else if (n_C(sequence,i)==1 && n_C(sequence,i+1)==1 && n_U(sequence,i+2)==1){
+            traduit[j]='P';
+            j++;
+            
+        }
+        else if (n_C(sequence,i)==1 && n_C(sequence,i+1)==1 && n_C(sequence,i+2)==1){
+            traduit[j]='P';
+            j++;
+            
+        }
+        else if (n_C(sequence,i)==1 && n_C(sequence,i+1)==1 && n_A(sequence,i+2)==1){
+            traduit[j]='P';
+            j++;
+            
+        }
+        else if (n_C(sequence,i)==1 && n_C(sequence,i+1)==1 && n_G(sequence,i+2)==1){
+            traduit[j]='P';
+            j++;
+            
+        }
+        //triplets commencant par CG
+        else if (n_C(sequence,i)==1 && n_G(sequence,i+1)==1 && n_U(sequence,i+2)==1){
+            traduit[j]='R';
+            j++;
+            
+        }
+        else if (n_C(sequence,i)==1 && n_G(sequence,i+1)==1 && n_C(sequence,i+2)==1){
+            traduit[j]='R';
+            j++;
+            
+        }
+        else if (n_C(sequence,i)==1 && n_G(sequence,i+1)==1 && n_A(sequence,i+2)==1){
+            traduit[j]='R';
+            j++;
+            
+        }
+        else if (n_C(sequence,i)==1 && n_G(sequence,i+1)==1 && n_G(sequence,i+2)==1){
+            traduit[j]='R';
+            j++;
+            
+        }
+        //triplets commencant par CU
+        else if (n_C(sequence,i)==1 && n_U(sequence,i+1)==1 && n_U(sequence,i+2)==1){
+            traduit[j]='L';
+            j++;
+            
+        }
+        else if (n_C(sequence,i)==1 && n_U(sequence,i+1)==1 && n_C(sequence,i+2)==1){
+            traduit[j]='L';
+            j++;
+            
+        }
+        else if (n_C(sequence,i)==1 && n_U(sequence,i+1)==1 && n_A(sequence,i+2)==1){
+            traduit[j]='L';
+            j++;
+            
+        }
+        else if (n_C(sequence,i)==1 && n_U(sequence,i+1)==1 && n_G(sequence,i+2)==1){
+            traduit[j]='L';
+            j++;
+            
+        }
+
+        //triplets commencant par GA
+        else if (n_G(sequence,i)==1 && n_A(sequence,i+1)==1 && n_U(sequence,i+2)==1){
+            traduit[j]='D';
+            j++;
+            
+        }
+        else if (n_G(sequence,i)==1 && n_A(sequence,i+1)==1 && n_C(sequence,i+2)==1){
+            traduit[j]='D';
+            j++;
+            
+        }
+        else if (n_G(sequence,i)==1 && n_A(sequence,i+1)==1 && n_A(sequence,i+2)==1){
+            traduit[j]='E';
+            j++;
+            
+        }
+        else if (n_G(sequence,i)==1 && n_A(sequence,i+1)==1 && n_G(sequence,i+2)==1){
+            traduit[j]='E';
+            j++;
+            
+        }
+        //triplets commencant par GC
+        else if (n_G(sequence,i)==1 && n_C(sequence,i+1)==1 && n_U(sequence,i+2)==1){
+            traduit[j]='A';
+            j++;
+            
+        }
+        else if (n_G(sequence,i)==1 && n_C(sequence,i+1)==1 && n_C(sequence,i+2)==1){
+            traduit[j]='A';
+            j++;
+            
+        }
+        else if (n_G(sequence,i)==1 && n_C(sequence,i+1)==1 && n_A(sequence,i+2)==1){
+            traduit[j]='A';
+            j++;
+            
+        }
+        else if (n_G(sequence,i)==1 && n_C(sequence,i+1)==1 && n_G(sequence,i+2)==1){
+            traduit[j]='A';
+            j++;
+            
+        }
+        //triplets commencant par GG
+        else if (n_G(sequence,i)==1 && n_G(sequence,i+1)==1 && n_U(sequence,i+2)==1){
+            traduit[j]='G';
+            j++;
+            
+        }
+        else if (n_G(sequence,i)==1 && n_G(sequence,i+1)==1 && n_C(sequence,i+2)==1){
+            traduit[j]='G';
+            j++;
+            
+        }
+        else if (n_G(sequence,i)==1 && n_G(sequence,i+1)==1 && n_A(sequence,i+2)==1){
+            traduit[j]='G';
+            j++;
+            
+        }
+        else if (n_G(sequence,i)==1 && n_G(sequence,i+1)==1 && n_G(sequence,i+2)==1){
+            traduit[j]='G';
+            j++;
+            
+        }
+        //triplets commencant par GU
+        else if (n_G(sequence,i)==1 && n_U(sequence,i+1)==1 && n_U(sequence,i+2)==1){
+            traduit[j]='V';
+            j++;
+            
+        }
+        else if (n_G(sequence,i)==1 && n_U(sequence,i+1)==1 && n_C(sequence,i+2)==1){
+            traduit[j]='V';
+            j++;
+            
+        }
+        else if (n_G(sequence,i)==1 && n_U(sequence,i+1)==1 && n_A(sequence,i+2)==1){
+            traduit[j]='V';
+            j++;
+            
+        }
+        else if (n_G(sequence,i)==1 && n_U(sequence,i+1)==1 && n_G(sequence,i+2)==1){
+            traduit[j]='V';
+            j++;
+            
+        }
+
+        //triplets commencant par UA
+        else if (n_U(sequence,i)==1 && n_A(sequence,i+1)==1 && n_U(sequence,i+2)==1){
+            traduit[j]='Y';
+            j++;
+            
+        }
+        else if (n_U(sequence,i)==1 && n_A(sequence,i+1)==1 && n_C(sequence,i+2)==1){
+            traduit[j]='Y';
+            j++;
+            
+        }
+        else if (n_U(sequence,i)==1 && n_A(sequence,i+1)==1 && n_A(sequence,i+2)==1){
+            traduit[j]='*';
+            j++;
+            
+        }
+        else if (n_U(sequence,i)==1 && n_A(sequence,i+1)==1 && n_G(sequence,i+2)==1){
+            traduit[j]='*';
+            j++;
+            
+        }
+        //triplets commencant par AC
+        else if (n_U(sequence,i)==1 && n_C(sequence,i+1)==1 && n_U(sequence,i+2)==1){
+            traduit[j]='S';
+            j++;
+            
+        }
+        else if (n_U(sequence,i)==1 && n_C(sequence,i+1)==1 && n_C(sequence,i+2)==1){
+            traduit[j]='S';
+            j++;
+            
+        }
+        else if (n_U(sequence,i)==1 && n_C(sequence,i+1)==1 && n_A(sequence,i+2)==1){
+            traduit[j]='S';
+            j++;
+            
+        }
+        else if (n_U(sequence,i)==1 && n_C(sequence,i+1)==1 && n_G(sequence,i+2)==1){
+            traduit[j]='S';
+            j++;
+            
+        }
+        //triplets commencant par UG
+        else if (n_U(sequence,i)==1 && n_G(sequence,i+1)==1 && n_U(sequence,i+2)==1){
+            traduit[j]='C';
+            j++;
+            
+        }
+        else if (n_U(sequence,i)==1 && n_G(sequence,i+1)==1 && n_C(sequence,i+2)==1){
+            traduit[j]='C';
+            j++;
+            
+        }
+        else if (n_U(sequence,i)==1 && n_G(sequence,i+1)==1 && n_A(sequence,i+2)==1){
+            traduit[j]='*';
+            j++;
+            
+        }
+        else if (n_U(sequence,i)==1 && n_G(sequence,i+1)==1 && n_G(sequence,i+2)==1){
+            traduit[j]='W';
+            j++;
+            
+        }
+        //triplets commencant par UU
+        else if (n_U(sequence,i)==1 && n_U(sequence,i+1)==1 && n_U(sequence,i+2)==1){
+            traduit[j]='F';
+            j++;
+            
+        }
+        else if (n_U(sequence,i)==1 && n_U(sequence,i+1)==1 && n_C(sequence,i+2)==1){
+            traduit[j]='F';
+            j++;
+            
+        }
+        else if (n_U(sequence,i)==1 && n_U(sequence,i+1)==1 && n_A(sequence,i+2)==1){
+            traduit[j]='L';
+            j++;
+            
+        }
+        else{
+            traduit[j]='M';
+            j++;
+            
+        }
+        i=i+3;               
+    }
+
 //sauvegarde de la séquence
-    printf("%s",trad);
     printf("Votre sequence a bien été traduite, elle est désormais enregistrée ici : %s \n", path_output );
-    save_sequence(path_output, trad);
+    save_sequence(path_output, traduit);
 
 }
 
@@ -341,4 +388,3 @@ void module_traduction(char* sequence){
     
     traduction(path_output, sequence);
 }
-
