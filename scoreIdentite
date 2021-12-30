@@ -1,0 +1,47 @@
+#include <stdio.h>
+#include <string.h>
+
+
+void scoreId(char seq1[], char seq2[]) {
+	/*Cette fonction renvoie le score d'identité entre deux séquences, donc le pourcentage d'acides aminés ou de nucléotides présents à la même place dans les deux séquences
+Attention : les séquences doivent être de même taille car obtenues par alignement multiple*/
+	if (strlen(seq1)!=strlen(seq2)) { //dans le cas où les séquences n'ont pas la même taille
+		printf("ERREUR \nles séquences doivent être de même taille.\n");
+	}
+	else {
+		int n=strlen(seq1); //taille des séquences
+		int nbId=0; //nombre de résidus identiques
+		char idSeq[n]; //chaine de caractère qui retient où sont les idenntités de séquece et qui elles sont
+		
+		for (int i=0;i<n;i++) {
+			if(seq1[i]==seq2[i]){
+				nbId+=1; //une identité trouvée
+				idSeq[i]=seq1[i]; //on note l'identité à sa place dans la séquence identité
+			}
+			else 
+				idSeq[i]='-'; //il n'y a pas d'identité, on met donc un gap
+		}
+		
+		double nombreId=nbId;
+		double nbChar=n;
+		double scoreIdentite=(nombreId/nbChar); //on calcule le pourcentage d'identité
+		
+		printf("\nIdentité de séquence: %d/%d soit %lf%%\n",nbId,n,scoreIdentite*100);
+		
+		printf("seq1 ");
+		for (int k=0;k<n;k++) 
+			printf("%c",seq1[k]);
+			
+		printf("\nseq2 ");
+		for (int l=0;l<n;l++) 
+			printf("%c",seq2[l]);
+			
+		printf("\n-id- ");
+		for (int j=0;j<n;j++) 
+			printf("%c",idSeq[j]);
+		
+		printf("\n");
+	}
+}
+
+
