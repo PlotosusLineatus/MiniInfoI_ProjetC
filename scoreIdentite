@@ -14,7 +14,7 @@ Attention : les séquences doivent être de même taille car obtenues par aligne
 		char idSeq[n]; //chaine de caractère qui retient où sont les idenntités de séquece et qui elles sont
 		
 		for (int i=0;i<n;i++) {
-			if(seq1[i]==seq2[i]){
+			if(seq1[i]==seq2[i] && seq1[i]!='-'){
 				nbId+=1; //une identité trouvée
 				idSeq[i]=seq1[i]; //on note l'identité à sa place dans la séquence identité
 			}
