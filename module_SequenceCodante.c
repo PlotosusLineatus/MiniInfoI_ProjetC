@@ -1,79 +1,10 @@
 #include "utils.h"
 #include "module_SequenceCodante.h"
 
-void ChercheSeq(const char* path_output, char* sequence){
-//Cette fonction cherche le plus grand fragment de séquence commencant par un codon start et finissant par un codon stop
-
-//Variables
-    int i=0; //compteur de la sequence
-    int j=0; //compteur de l'ORF
-    int nbAA=0; //compte le nombre d'Acide Aminés (pour récupérer la plus grande séquence)
-    int nbAA2=0; //permet de comparer la taille des ORFs
-    char Orf[10000]; //stocke la sequence codante
-    int start=0; //note à quel [i] la séquence codante commence
-    int stop=0; //note à quel [i] la séquence se termine, sert de booleen egalement
-
-//Recherche dans le brin sens
-
-    //Boucle
-    while(sequence[i]!='\0'){
-        
-    //Recherche de séquence codante    
-        while(stop==0){
-        //Recherche du codon start    
-            if (sequence[i] =='A'){
-                if (sequence[i+1]=='T'){
-                    if (sequence[i+2]=='G'){
-                        start=i;
-                        nbAA++;
-                        i+3;
-                    }
-                }
-            }
-            else{
-                i++;
-            }
-        //Recherche du codon stop
-            if (sequence[i]=='T'){
-                if(sequence[i+1]=='A'){
-                    if (sequence[i+2]=='A'||'G'){
-                        stop=i;
-                        nbAA++;
-                    }
-                }
-                else if (sequence [i+1]=='G'){
-                    if (sequence[i+2]=='A'){
-                        stop=i;
-                        nbAA++;
-                    }
-                }
-            }
-            else{
-                i+3;
-                nbAA++;
-            }
-        }
-    //Verification de la taille de l'ORF et inscription de la séquence
-        if (nbAA>nbAA2){
-            for(i=start;i=stop;i++){
-                Orf[j]=sequence[i];
-                j++;
-            }
-            j=0;
-        }
-
-    //retour à la recherche d'Orf
-        nbAA2=nbAA;
-        nbAA=0;
-        i=stop+1;
-        stop=0;
-    }
-
-//Dans le brin antisens
-
-    //inversion de la chaine
+void inversionChaine(char* sequence){
     int k,n; //compteurs
     char nucleo; //stocke le nucleotide afin de ne parcourir que la moitié de la chaine
+
     n=strlen(sequence);
 
     for(k=0;k<n/2;k++){
@@ -81,85 +12,179 @@ void ChercheSeq(const char* path_output, char* sequence){
         sequence[k]=sequence[n-k-1]; //-1 car on ne veut pas que le \0 change de place!
         sequence[n-k-1]=nucleo;
     }
-    //Rendre la chaine complementaire
-    while (i!='\0'){
+    printf("La sequence a ete inversee.\n");
+}
+void Complementaire(char* sequence){
+    int i,n;
+
+    n= strlen(sequence);
+
+    for (i=0;i<n;i++){
         if (sequence[i]=='A'){
             sequence[i]='T';
-            i++;
         }
         else if (sequence[i]=='T'){
             sequence[i]='A';
-            i++;
         }
         else if (sequence[i]=='C'){
             sequence[i]='G';
-            i++;
         }
-        else if (sequence[i]=='G'){
+        else{
             sequence[i]='C';
-            i++;
-    }
-    }
-//Remise des compteurs à 0
-    i=0;
-    j=0;
-
-//Boucle
-while(sequence[i]!='\0'){
-
-    //Recherche de séquence codante    
-        while(stop==0){
-        //Recherche du codon start    
-            if (sequence[i] =='A'){
-                if (sequence[i+1]=='T'){
-                    if (sequence[i+2]=='G'){
-                        start=i;
-                        nbAA++;
-                        i+3;
-                    }
-                }
-            }
-            else{
-                i++;
-            }
-        //Recherche du codon stop
-            if (sequence[i]=='T'){
-                if(sequence[i+1]=='A'){
-                    if (sequence[i+2]=='A'||'G'){
-                        stop=i;
-                        nbAA++;
-                    }
-                }
-                else if (sequence [i+1]=='G'){
-                    if (sequence[i+2]=='A'){
-                        stop=i;
-                        nbAA++;
-                    }
-                }
-            }
-            else{
-                i+3;
-                nbAA++;
-            }
         }
-    //Verification de la taille de l'ORF et inscription de la séquence
-        if (nbAA>nbAA2){
-            for(i=start;i=stop;i++){
-                Orf[j]=sequence[i];
-                j++;
-            }
-            j=0;
-        }
-
-    //retour à la recherche d'Orf
-        nbAA2=nbAA;
-        nbAA=0;
-        i=stop+1;
-        stop=0;
     }
+    printf("La séquence est maintenant rendue complémentaire.\n");    
+}
 
-    printf("Votre plus grande Orf a bien été sauvegardée, elle est désormais enregistrée ici : %s \n", path_output );
-    save_sequence(path_output, Orf);
+char* EcritureSequence(char* sequence, int debut, int fin){
+    char SequenceOrf[10000];
+    int i,j; //stocke la sequence codante
+    for(i=debut; i=fin; i++){
+    SequenceOrf[j]=sequence[i];
+    j++;
+    }
+    printf("La séquence a été stockée \n");
+    return(SequenceOrf);
+}
+
+void ChercheSeq(const char* path_output,char *sequence){
+
+//Initialisation des variables
+    int i=0; //compteur de la sequence d'interêt
+    int j=0; //compteur de l'ORF (pour la sauvegarde)
+    int k=0; //compteur de l'ORF (pour la recherche du codon stop)
+    int numero=0; //compteur pour le tableau de structure
+    int end=0; //booleen pour sortir de la recherche de codon stop
+    char sens[10000]; //stocke la plus grande Orf dans le sens
+    char antisens[10000]; //stocke la plus grande Orf dans l'antisens
+    struct Orf PlusGrandeOrf = {0,0,0}; // stocke la plus grande Orf
+    struct Orf NumeroOrf[100]={0};
+    int t;
+
+t=strlen(sequence);
+
+//Dans le brin sens
+
+for(i=0;i<t;i++){
+    //Recherche codon start
+    if(sequence[i]=='A' && sequence[i+1]=='T' && sequence[i+2]=='G'){
+        printf("Un codon start a été trouvé en position %d. \n", i);
+        k=i;
+        numero++;
+        NumeroOrf[numero].start=i;
+        NumeroOrf[numero].longueur=1;
+        end=0;
+
+        while (end==0 && k<t){
+            //Recherche codon stop
+                if (sequence[k]=='T'&& sequence[k+1]=='A' && sequence[k+2]=='G'){
+                    NumeroOrf[numero].stop=k+3;
+                    NumeroOrf[numero].longueur++;
+                    if(NumeroOrf[numero].longueur>PlusGrandeOrf.longueur){
+                        PlusGrandeOrf.start=i;
+                        PlusGrandeOrf.stop=k+3;
+                        PlusGrandeOrf.longueur = NumeroOrf[numero].longueur;
+                    }
+                    printf("Fin de l'Orf numero %d, avec longueur de %d \n", numero, NumeroOrf[numero].longueur);
+                    end=1;
+                }
+                else if (sequence[k]=='T' && sequence[k+1]=='A' && sequence[k+2]=='A'){
+                    NumeroOrf[numero].stop=k;
+                    NumeroOrf[numero].longueur++;
+                    if(NumeroOrf[numero].longueur>PlusGrandeOrf.longueur){
+                        PlusGrandeOrf.start=i;
+                        PlusGrandeOrf.stop=k+3;
+                        PlusGrandeOrf.longueur = NumeroOrf[numero].longueur;
+                    }
+                    printf("Fin de l'Orf numero %d, avec longueur de %d\n", numero, NumeroOrf[numero].longueur);                    
+                    end=1;
+                }
+                else if (sequence[k]=='T' && sequence[k+1]=='G' && sequence[k+2]=='A'){
+                    NumeroOrf[numero].stop=k;
+                    NumeroOrf[numero].longueur++;
+                    if(NumeroOrf[numero].longueur>PlusGrandeOrf.longueur){
+                        PlusGrandeOrf.start=i;
+                        PlusGrandeOrf.stop=k+3;
+                        PlusGrandeOrf.longueur = NumeroOrf[numero].longueur;
+                    }
+                    printf("Fin de l'Orf numero %d, avec longueur de %d\n", numero, NumeroOrf[numero].longueur);                    
+                    end=1;
+                }
+                else{
+                    k=k+3;
+                    NumeroOrf[numero].longueur++;
+                }
+        }
+    }
+}
+printf("La recherche de sequence codante dans le brin sens est terminee.\n");
+sens=EcritureSequence(sequence,PlusGrandeOrf.start,PlusGrandeOrf.stop);
+
+inversionChaine(sequence);
+Complementaire(sequence);
+
+printf("La chaine a ete inversée, la recherche dans le brin antisens va commencer. \n");
+i=0;
+
+for(i=0;i<t;i++){
+    //Recherche codon start
+    if(sequence[i]=='A' && sequence[i+1]=='T' && sequence[i+2]=='G'){
+        printf("Un codon start a été trouvé en position %d. \n", i);
+        k=i;
+        numero++;
+        NumeroOrf[numero].start=i;
+        NumeroOrf[numero].longueur=1;
+        end=0;
+
+        while (end==0 && k<t){
+            //Recherche codon stop
+                if (sequence[k]=='T'&& sequence[k+1]=='A' && sequence[k+2]=='G'){
+                    NumeroOrf[numero].stop=k+3;
+                    NumeroOrf[numero].longueur++;
+                    if(NumeroOrf[numero].longueur>PlusGrandeOrf.longueur){
+                        PlusGrandeOrf.start=i;
+                        PlusGrandeOrf.stop=k+3;
+                        PlusGrandeOrf.longueur = NumeroOrf[numero].longueur;
+                    }
+                    printf("Fin de l'Orf numero %d, avec longueur de %d\n", numero, NumeroOrf[numero].longueur);
+                    end=1;
+                }
+                else if (sequence[k]=='T' && sequence[k+1]=='A' && sequence[k+2]=='A'){
+                    NumeroOrf[numero].stop=k;
+                    NumeroOrf[numero].longueur++;
+                    if(NumeroOrf[numero].longueur>PlusGrandeOrf.longueur){
+                        PlusGrandeOrf.start=i;
+                        PlusGrandeOrf.stop=k+3;
+                        PlusGrandeOrf.longueur = NumeroOrf[numero].longueur;
+                    }
+                    printf("Fin de l'Orf numero %d, avec longueur de %d\n", numero, NumeroOrf[numero].longueur);                    
+                    end=1;
+                }
+                else if (sequence[k]=='T' && sequence[k+1]=='G' && sequence[k+2]=='A'){
+                    NumeroOrf[numero].stop=k;
+                    NumeroOrf[numero].longueur++;
+                    if(NumeroOrf[numero].longueur>PlusGrandeOrf.longueur){
+                        PlusGrandeOrf.start=i;
+                        PlusGrandeOrf.stop=k+3;
+                        PlusGrandeOrf.longueur = NumeroOrf[numero].longueur;
+                    }
+                    printf("Fin de l'Orf numero %d, avec longueur de %d\n", numero, NumeroOrf[numero].longueur);                    
+                    end=1;
+                }
+                else{
+                    k=k+3;
+                    NumeroOrf[numero].longueur++;
+                }
+        }
+    }
+}
+
+printf("%d Orfs ont été trouvées, la plus grande contient %d Acides Aminés, commence en position %d et se termine en position %d.\n", numero, PlusGrandeOrf.longueur, PlusGrandeOrf.start, PlusGrandeOrf.stop);
+
+
+save_sequence(path_output,sens);
+printf("Votre plus grande Orf a bien été sauvegardée, elle est désormais enregistrée ici : %s \n", path_output);
+
 }
 
 void module_SequenceCodante(char* sequence){
