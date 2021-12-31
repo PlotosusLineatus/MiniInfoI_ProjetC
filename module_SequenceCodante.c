@@ -47,6 +47,16 @@ char* EcritureSequence(char* sequence, int debut, int fin){
     return(SequenceOrf);
 }
 
+void SauvegardePlusGrande(char* sequence1, char* sequence2, const char* path_output){
+    if(strlen(sequence1)>strlen(sequence2)){
+    save_sequence(path_output,sequence1);
+}
+else{
+    save_sequence(path_output,sequence2);
+}
+
+}
+
 void ChercheSeq(const char* path_output,char *sequence){
 
 //Initialisation des variables
@@ -124,7 +134,11 @@ inversionChaine(sequence);
 Complementaire(sequence);
 
 printf("La chaine a ete inversée, la recherche dans le brin antisens va commencer. \n");
+//Reinitialisation des parametres
 i=0;
+numero=0;
+PlusGrandeOrf={0,0,0};
+NumeroOrf[100]={0};
 
 for(i=0;i<t;i++){
     //Recherche codon start
@@ -178,11 +192,11 @@ for(i=0;i<t;i++){
         }
     }
 }
-
+printf("La recherche de sequence codante dans le brin antisens est terminee.\n");
+antisens=EcritureSequence(sequence,PlusGrandeOrf.start,PlusGrandeOrf.stop);
 printf("%d Orfs ont été trouvées, la plus grande contient %d Acides Aminés, commence en position %d et se termine en position %d.\n", numero, PlusGrandeOrf.longueur, PlusGrandeOrf.start, PlusGrandeOrf.stop);
 
-
-save_sequence(path_output,sens);
+SauvegardePlusGrande(sens, antisens, path_output);
 printf("Votre plus grande Orf a bien été sauvegardée, elle est désormais enregistrée ici : %s \n", path_output);
 
 }

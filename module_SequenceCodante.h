@@ -12,7 +12,8 @@
     void module_SequenceCodante(char* sequence);
     void inversionChaine(char* sequence);
     void Complementaire(char* sequence);
-    char EcritureSequence(char* sequence, int debut, int fin);
+    char* EcritureSequence(char* sequence, int debut, int fin);
+    void SauvegardePlusGrande(char* sequence1, char* sequence2, const char* path_output);
     void ChercheSeq(const char* path_output, char* sequence);
 
 #endif
