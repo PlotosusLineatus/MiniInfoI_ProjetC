@@ -6,8 +6,8 @@ void seqConsensus(char align[40], FILE * cons) {
 	/*ce module recherche la séquence consensus dans un fichier d'alignement de séquences. Il renvoie une séquence consensus avec un code comme suit :
 	à chaque position,
 	caractère : caractère conservé
-	* : caractère retriuvé dans au moins 80% des séquences alignées
-	- : caractère retruové dans au moins 60% des séquences alignées
+	* : caractère retrouvé dans au moins 80% des séquences alignées
+	- : caractère retrouvé dans au moins 60% des séquences alignées
 	  : pas de caractère présent en majorité */
 	FILE * aliSeq=fopen(align,"r");
 	
@@ -53,8 +53,22 @@ void seqConsensus(char align[40], FILE * cons) {
 		nbOccurTot=0;
 		code=' '; //par défaut, modifié si on trouve un caractère majoritaire
 		marqueurFin=0;	
-		printf("\n%d\n",c);
 		while(marqueurFin==0) {
+			
+			
+			if (k>=lmax) {
+			
+				l++; //on teste un nouveau caractère, le précédent n'est pas majoritaire
+				k=l+1;
+				nbOccurTot+=nbOccur;
+				nbOccur=1;//on va compter le nombre d'occurences du nouveau caractère testé
+				if (nbOccurTot/nbLignes>0.4) {
+				/*plus de 40% des caractères ont été vus, il n'y aura donc pas d'occurence d'un résidu à 60% ou plus*/
+				//code=' ';
+				marqueurFin=1;	
+				}	
+			}
+			
 					
 			if (tableau[l][c]==tableau[k][c]) {
 				nbOccur+=1;	
@@ -66,57 +80,56 @@ void seqConsensus(char align[40], FILE * cons) {
 				/*occurence d'un caractère à 60% ou plus*/
 					code='-'; //on ne sais pas encore si l'occurence se fait à plus de 60%
 					marqueurFin=1;
-					printf("\non a cas %c majo et k=%d\n",tableau[l][c],k);
 					/*on a trouvé un caractère majoritaire*/
 				}
 					
 			}
 			k++; //on teste une nouvelle ligne
-			//printf("essai\n k=%d\n",k);
-			
-			
-			if (k>=lmax) {
-				printf("\n%c k>lmax   nbOccur %lf\n",tableau[l][c],nbOccur);
-				l++; //on teste un nouveau caractère, le précédent n'est pas majoritaire
-				k=l+1;
-				nbOccurTot+=nbOccur;
-				nbOccur=1;//on va compter le nombre d'occurences du nouveau caractère testé
-				if (nbOccurTot/nbLignes>0.4) {
-				/*plus de 40% des caractères ont été vus, il n'y aura donc pas d'occurence d'un résidu à 60% ou plus*/
-				//code=' ';
-				marqueurFin=1;	
-				}	
-			}	
+				
 			
 		}
 		
 		if (code=='-')  {
 			/*on continue de compter les occurences du caractère majoritaire*/
-			printf(" \ncas majo %c k= %d nbOccu=%lf\n",tableau[l][c],k,nbOccur);
-			for (ligneCompte=k;ligneCompte<lmax;ligneCompte++) {
-				if (tableau[l][c]==tableau[ligneCompte][c]) 
-					nbOccur+=1;	
+			
+			if (tableau[l][c]=='-') {
+			/*le caractère majoritaire est un gap donc on considère qu'il n'y a pas de caractère présen t en majorité*/
+				code=' '; 
 			}
-			printf("\nvrai nbOccur=%lf\n",nbOccur); 
-			if ((nbOccur/nbLignes)>=0.8) {
-				code='*';
-				if ((nbOccur/nbLignes)==1)
-					code=tableau[l][c];
+			else {
+				for (ligneCompte=k;ligneCompte<lmax;ligneCompte++) {
+					if (tableau[l][c]==tableau[ligneCompte][c]) 
+						nbOccur+=1;	
+				}
+				
+				if ((nbOccur/nbLignes)>=0.8) {
+					code='*';
+					if ((nbOccur/nbLignes)==1)
+						code=tableau[l][c];
+				}
 			}
 		}
 		
-		printf("\n%c\n",code);
-		
+		fprintf(cons,"%c",code);
+
 	}
 	
 }
 
 
 int main() {
+	
+	/*	ATTENTION les noms de fichiers donnés doivent appartenir au dossier courant, il faudra utiliser les utils pour récupérer le path pour que ça fonctionne réellement bien*/
 	printf("\nVous pouvez indiquer le nom du fichier d'alignement de séquence ci-dessous.\n\nAttention: le fichier doit contenir un maximum de 30 séquences d'au plus 10000 caractères chacune\n\nnom du fichier: ");
 	char align[40];
 	scanf("%s",align);
-	FILE * seqCons=fopen("consensus.txt","w");
+	
+	printf("\nDans quel fichier vide voulez-vous enregistrer la séquence consensus ?\n\nNom du fichier: ");
+	char consensus[40];
+	scanf("%s",consensus);
+	FILE * seqCons=fopen(consensus,"w");
+	
 	seqConsensus(align, seqCons);
+	
 	return 0;
 }
