@@ -44,7 +44,7 @@ void traduction (const char* path_output, char* sequence){
 
     t=strlen(sequence);
 
-    for(i=0; i<t; i+3){
+    for(i=0; i<t; i+=3){
         printf("Position: %d\n",i);
         //triplets commencant par AA
         if (n_A(sequence,i)==1 && n_A(sequence,i+1)==1 && n_U(sequence,i+2)==1){
