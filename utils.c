@@ -4,7 +4,7 @@ void extract_sequence(const char* path_input, char* sequence) {
 	/*cette procédure récupère la séquence fasta simplifiée et la met dans sequence*/
 	FILE* fasta = fopen(path_input,"r");
             if(!fasta){
-                printf("L'ouverture a echoue. \n");
+                printf("L'ouverture a échoué. \n");
                 exit(EXIT_FAILURE);
         }
 	char c;
@@ -68,3 +68,42 @@ IdLongueur max(char seq1[], char seq2[]) {
 	}
 	return seqPlusLongue;
 }
+
+
+Seq1Seq2 recupereSeq1Seq2(const char* path_input1, const char* path_input2) {
+	char seq1[10000];
+	char seq2[10000];
+	extract_sequence(path_input1, seq1);
+	extract_sequence(path_input2, seq2);
+	
+	Seq1Seq2 sequences;
+	sequences.seq1=seq1;
+	sequences.seq2=seq2;
+	
+	int lenseq1=strlen(seq1);
+	int lenseq2=strlen(seq2);
+	
+	if (lenseq1==lenseq2) 
+		sequences.memeLongueur='O';
+	else 
+		sequences.memeLongueur='N';
+		
+	return sequences;
+}
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
