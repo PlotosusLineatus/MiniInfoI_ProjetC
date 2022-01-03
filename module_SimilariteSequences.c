@@ -8,8 +8,8 @@ void scoreSimil(char seq1[], char seq2[]) {
 	/*définition des polarités de sacides aminés : 
 A, V, L, I, P, F, W, M, G sont hydrophobes  
 C, S, T, Y, N, Q, D, E, K, R, H sont hydrophiles */
-	char hydrophobe[9]="AVLIPFWMG"; //LISTE DES ACIDES AMINÉS HYDROPHOBES
-	/*char hydrophile[11]="CSTYNQDEKRH"; //liste des acides aminés hydrophiles*/
+	char hydrophobe[10]="AVLIPFWMG"; //LISTE DES ACIDES AMINÉS HYDROPHOBES
+	/*char hydrophile[12]="CSTYNQDEKRH"; //liste des acides aminés hydrophiles*/
 	
 	int n=strlen(seq1); //longueur des séquences
 	int i; //variable d'incrémentation
