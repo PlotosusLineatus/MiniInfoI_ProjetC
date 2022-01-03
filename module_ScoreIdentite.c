@@ -42,13 +42,17 @@ void scoreId(char seq1[], char seq2[]) {
 
 void module_ScoreIdentite() {
 	printf("\n\033[34;01mBienvenue dans le module 4: Calcul du score d'identité entre 2 séquences\033[00m\n\n");
-    printf("Quels sont les fichiers contenant les séquences dont vous voulez savoir le score d'identité? (Attention, les séquences doivent avoir la même taille.)\nséquence 1 : ");
-    char *path_input1=NULL ;
-    scanf("%s",path_input1);
+    printf("Quels sont les fichiers contenant les séquences dont vous voulez savoir le score d'identité? (Attention, les séquences doivent avoir la même taille.)\n\nséquence 1 : ");
+    char *input1=NULL ;
+    scanf("%s",input1);
     
     printf("\n\nséquence 2 : ");
-    char *path_input2=NULL;
-    scanf("%s",path_input2);
+    char *input2=NULL;
+    scanf("%s",input2);
+    printf("\ninput2=%s",input2);
+    
+    const char* path_input1=input1;
+    const char* path_input2=input2;
     
     Seq1Seq2 sequences=recupereSeq1Seq2(path_input1, path_input2);
     
