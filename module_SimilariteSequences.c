@@ -102,18 +102,3 @@ void module_ScoreSimilaritePolarite(){
     else
     	scoreSimil(sequences.seq1, sequences.seq2);
 }
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
