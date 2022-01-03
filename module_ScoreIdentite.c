@@ -43,14 +43,13 @@ void scoreId(char seq1[], char seq2[]) {
 void module_ScoreIdentite() {
 	printf("\n\033[34;01mBienvenue dans le module 4: Calcul du score d'identité entre 2 séquences\033[00m\n\n");
     printf("Quels sont les fichiers contenant les séquences dont vous voulez savoir le score d'identité? (Attention, les séquences doivent avoir la même taille.)\n\nséquence 1 : ");
-    char *input1=NULL ;
+    char input1[40];
     scanf("%s",input1);
     
     printf("\n\nséquence 2 : ");
-    char *input2=NULL;
+    char input2[40];
     scanf("%s",input2);
-    printf("\ninput2=%s",input2);
-    
+
     const char* path_input1=input1;
     const char* path_input2=input2;
     

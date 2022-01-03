@@ -83,13 +83,16 @@ C, S, T, Y, N, Q, D, E, K, R, H sont hydrophiles */
 
 void module_ScoreSimilaritePolarite(){
     printf("\n\033[34;01mBienvenue dans le module 5: Calcul du score de similarité de polarité entre 2 séquences\033[00m\n\n");
-    printf("Quels sont les fichiers contenant les séquences dont vous voulez savoir le score de similarité de polarité ? (Attention, les séquences doivent avoir la même taille.)\nséquence 1 : ");
-    char *path_input1=NULL ;
-    scanf("%s",path_input1);
+    printf("Quels sont les fichiers contenant les séquences dont vous voulez savoir le score de similarité de polarité ? (Attention, les séquences doivent avoir la même taille.)\n\nséquence 1 : ");
+    char input1[40] ;
+    scanf("%s",input1);
     
     printf("\n\nséquence 2 : ");
-    char *path_input2=NULL;
-    scanf("%s",path_input2);
+    char input2[40];
+    scanf("%s",input2);
+     
+    const char* path_input1=input1;
+    const char* path_input2=input2;
     
     Seq1Seq2 sequences=recupereSeq1Seq2(path_input1, path_input2);
     
