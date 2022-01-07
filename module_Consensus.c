@@ -2,7 +2,7 @@
 #include "module_Consensus.h"
 
 void seqConsensus(char align[40], FILE * cons) {
-	/*ce module recherche la séquence consensus dans un fichier d'alignement de séquences. Il renvoie une séquence consensus avec un code comme suit :
+	/*ce module recherche la séquence consensus dans un fichier d'alignement de séquences. Il enregistre une séquence consensus avec un code comme suit :
 	à chaque position,
 	caractère : caractère conservé
 	* : caractère retrouvé dans au moins 80% des séquences alignées
